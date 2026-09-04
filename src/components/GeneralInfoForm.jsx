@@ -1,9 +1,14 @@
-function GeneralInfoForm({ info, isSubmitted, onSubmit, onEdit }) {
-  const { name, email, phoneNumber } = info;
+function GeneralInfoForm({
+  isSubmitted,
+  savedGeneralInfo,
+  saveGeneralInfo,
+  onEdit,
+}) {
+  const { name, email, phoneNumber } = savedGeneralInfo;
 
   return (
-    <form action="" id="general">
-      <div>
+    <div id="general">
+      <form action="" className="general-form">
         <h1>General Information</h1>
         <div>
           <label htmlFor="name" />
@@ -39,13 +44,22 @@ function GeneralInfoForm({ info, isSubmitted, onSubmit, onEdit }) {
               Edit
             </button>
           ) : (
-            <button type="button" onClick={onSubmit}>
+            <button
+              type="button"
+              onClick={() =>
+                saveGeneralInfo(
+                  Object.fromEntries(
+                    new FormData("general", "general-form").entries(),
+                  ),
+                )
+              }
+            >
               Submit
             </button>
           )}
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }
 
