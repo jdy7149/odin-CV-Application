@@ -1,53 +1,82 @@
 import { useState } from "react";
 
-function EduExperienceForm({ isSubmitted, onSubmit, onEdit }) {
-  const [eduInfo, setEduInfo] = useState([]);
+function EduExperienceForm({ isSubmitted, savedEduItems, onSubmit, onEdit }) {
+  const [eduItems, setEduItems] = useState(savedEduItems);
+
+  function onDelete(id) {
+    setEduItems((items) => items.filter((item) => item.id !== id));
+  }
+
+  function onAdd() {
+    setEduItems((items) => [
+      {
+        id: crypto.randomUUID(),
+        school: "",
+        course: "",
+        eduStartDate: "",
+        eduEndDate: "",
+      },
+      ...items,
+    ]);
+  }
 
   return (
     <div id="edu">
       <h1>Education Experience</h1>
-      {eduInfo.map(({ school, course, eduStartDate, eduEndDate }, i) => {
-        <div>
+
+      {eduItems.map(({ id, school, course, eduStartDate, eduEndDate }) => (
+        <div key={id}>
           <form className="edu-form">
-            <label htmlFor={"school-" + i}>Shcool</label>
+            <label htmlFor={`school-${id}`}>School</label>
             <input
               type="text"
               name="school"
-              id={"school-" + i}
+              id={`school-${id}`}
               value={school}
               required
               readOnly={isSubmitted}
             />
-            <label htmlFor={"course-" + i}>Course</label>
+
+            <label htmlFor={`course-${id}`}>Course</label>
             <input
               type="text"
               name="course"
-              id={"course-" + i}
+              id={`course-${id}`}
               value={course}
               required
               readOnly={isSubmitted}
             />
-            <label htmlFor={"eduStart-" + i}>Start Date</label>
+
+            <label htmlFor={`eduStart-${id}`}>Start Date</label>
             <input
               type="date"
               name="eduStart"
-              id={"eduStart-" + i}
+              id={`eduStart-${id}`}
               value={eduStartDate}
               required
               readOnly={isSubmitted}
             />
-            <label htmlFor={"eduEnd-" + i}>End Date</label>
+
+            <label htmlFor={`eduEnd-${id}`}>End Date</label>
             <input
               type="date"
               name="eduEnd"
-              id={"eduEnd-" + i}
+              id={`eduEnd-${id}`}
               value={eduEndDate}
               readOnly={isSubmitted}
             />
-            <div>{!isSubmitted && <button type="button">Delete</button>}</div>
+
+            <div>
+              {!isSubmitted && (
+                <button type="button" onClick={() => onDelete(id)}>
+                  Delete
+                </button>
+              )}
+            </div>
           </form>
-        </div>;
-      })}
+        </div>
+      ))}
+
       <div>
         {isSubmitted ? (
           <button type="button" onClick={onEdit}>
@@ -55,13 +84,11 @@ function EduExperienceForm({ isSubmitted, onSubmit, onEdit }) {
           </button>
         ) : (
           <>
-            <button
-              type="button"
-              onClick={setEduInfo([...eduInfo, { id: crypto.randomUUID() }])}
-            >
+            <button type="button" onClick={onAdd}>
               Add
             </button>
-            <button type="submit" onClick={onSubmit}>
+
+            <button type="button" onClick={onSubmit}>
               Submit
             </button>
           </>

@@ -1,58 +1,78 @@
 import { useState } from "react";
 
-function WorkExperienceForm({ isSubmitted, onSubmit, onEdit }) {
-  const [workInfo, setWorkInfo] = useState([]);
+function WorkExperienceForm({ isSubmitted, savedWorkItems, onSubmit, onEdit }) {
+  const [workItems, setWorkItems] = useState(savedWorkItems);
 
   return (
     <div id="work">
       <h1>Work Experience</h1>
-      {workInfo.map(
-        (
-          { company, position, responsibilities, workStartDate, workEndDate },
-          i,
-        ) => {
-          <div>
+
+      {workItems.map(
+        ({
+          id,
+          company,
+          position,
+          responsibilities,
+          workStartDate,
+          workEndDate,
+        }) => (
+          <div key={id}>
             <form className="work-form">
-              <label htmlFor={"company-" + i}>Company</label>
+              <label htmlFor={`company-${id}`}>Company</label>
               <input
                 type="text"
                 name="company"
-                id={"company-" + i}
+                id={`company-${id}`}
                 value={company}
               />
-              <label htmlFor={"position-" + i}>Position</label>
+
+              <label htmlFor={`position-${id}`}>Position</label>
               <input
                 type="text"
                 name="position"
-                id={"position-" + i}
+                id={`position-${id}`}
                 value={position}
               />
-              <label htmlFor={"resposibilities-" + i}>Resposibilities</label>
+
+              <label htmlFor={`responsibilities-${id}`}>Responsibilities</label>
               <input
                 type="text"
-                name="resposibilities"
-                id={"resposibilities-" + i}
+                name="responsibilities"
+                id={`responsibilities-${id}`}
                 value={responsibilities}
               />
-              <label htmlFor={"workStart-" + i}>Start Date</label>
+
+              <label htmlFor={`workStart-${id}`}>Start Date</label>
               <input
                 type="date"
                 name="workStart"
-                id={"workStart-" + i}
+                id={`workStart-${id}`}
                 value={workStartDate}
               />
-              <label htmlFor={"workEnd-" + i}>End Date</label>
+
+              <label htmlFor={`workEnd-${id}`}>End Date</label>
               <input
                 type="date"
                 name="workEnd"
-                id={"workEnd-" + i}
+                id={`workEnd-${id}`}
                 value={workEndDate}
               />
-              <button type="button">Delete</button>
+
+              {!isSubmitted && (
+                <button
+                  type="button"
+                  onClick={() =>
+                    setWorkItems(workItems.filter((item) => item.id !== id))
+                  }
+                >
+                  Delete
+                </button>
+              )}
             </form>
-          </div>;
-        },
+          </div>
+        ),
       )}
+
       <div>
         {isSubmitted ? (
           <button type="button" onClick={onEdit}>
@@ -62,10 +82,13 @@ function WorkExperienceForm({ isSubmitted, onSubmit, onEdit }) {
           <>
             <button
               type="button"
-              onClick={setWorkInfo([...workInfo, { id: crypto.randomUUID }])}
+              onClick={() =>
+                setWorkItems([{ id: crypto.randomUUID() }, ...workItems])
+              }
             >
               Add
             </button>
+
             <button type="submit" onClick={onSubmit}>
               Submit
             </button>
