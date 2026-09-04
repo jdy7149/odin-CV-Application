@@ -45,14 +45,17 @@ function App() {
       <div>
         <GeneralInfoForm
           isSubmitted={isGeneralSubmitted}
+          savedGeneralInfo={generalInfo}
           onSubmit={onGeneralSubmit}
         />
         <EduExperienceForm
           isSubmitted={isEduSubmitted}
+          savedEduItems={eduItems}
           onSubmit={onEduSubmit}
         />
         <WorkExperienceForm
           isSubmitted={isWorkSubmitted}
+          savedWorkItems={workItems}
           onSubmit={onWorkSubmit}
         />
       </div>
