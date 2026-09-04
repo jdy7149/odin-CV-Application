@@ -16,52 +16,73 @@ function App() {
   const [eduItems, setEduItems] = useState([]);
   const [workItems, setWorkItems] = useState([]);
 
-  function onGeneralSubmit() {
-    setGeneralInfo(
-      Object.fromEntries(
-        new FormData(document.querySelector("#general")).entries(),
-      ),
-    );
+  function saveGeneralInfo(localInfo) {
+    setGeneralInfo(localInfo);
     setIsGeneralSubmitted(true);
   }
 
-  function onEduSubmit(localItems) {
+  function onGeneralEdit() {
+    setIsGeneralSubmitted(false);
+  }
+
+  function saveEduItems(localItems) {
     setEduItems(localItems);
     setIsEduSubmitted(true);
   }
 
-  function onWorkSubmit(localItems) {
+  function onEduEdit() {
+    setIsEduSubmitted(false);
+  }
+
+  function saveWorkItems(localItems) {
     setWorkItems(localItems);
     setIsWorkSubmitted(true);
   }
 
+  function onWorkEdit() {
+    setIsWorkSubmitted(false);
+  }
+
   return (
     <>
-      <div>
-        <h1>CV-Applicatioon</h1>
-      </div>
-      <div>
-        <GeneralInfoForm
-          isSubmitted={isGeneralSubmitted}
-          savedGeneralInfo={generalInfo}
-          onSubmit={onGeneralSubmit}
-        />
-        <EduExperienceForm
-          isSubmitted={isEduSubmitted}
-          savedEduItems={eduItems}
-          onSubmit={onEduSubmit}
-        />
-        <WorkExperienceForm
-          isSubmitted={isWorkSubmitted}
-          savedWorkItems={workItems}
-          onSubmit={onWorkSubmit}
-        />
-      </div>
-      <div>
-        <GeneralInfo info={generalInfo} />
-        <EduExperience items={eduItems} />
-        <WorkExperience items={workItems} />
-      </div>
+      <header>
+        <div className="header">
+          <h1>CV-Applicatioon</h1>
+        </div>
+      </header>
+      <main>
+        <div className="main">
+          <section>
+            <div className="form-wrapper">
+              <GeneralInfoForm
+                isSubmitted={isGeneralSubmitted}
+                savedGeneralInfo={generalInfo}
+                saveGeneralInfo={saveGeneralInfo}
+                onEdit={onGeneralEdit}
+              />
+              <EduExperienceForm
+                isSubmitted={isEduSubmitted}
+                savedEduItems={eduItems}
+                saveEduItems={saveEduItems}
+                onEdit={onEduEdit}
+              />
+              <WorkExperienceForm
+                isSubmitted={isWorkSubmitted}
+                savedWorkItems={workItems}
+                saveWorkItems={saveWorkItems}
+                onEdit={onWorkEdit}
+              />
+            </div>
+          </section>
+          <section>
+            <div className="display-wrapper">
+              <GeneralInfo info={generalInfo} />
+              <EduExperience items={eduItems} />
+              <WorkExperience items={workItems} />
+            </div>
+          </section>
+        </div>
+      </main>
     </>
   );
 }
