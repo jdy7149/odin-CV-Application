@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import parseFormData from "../utils/parseFormData";
+
 function WorkExperienceForm({
   isSubmitted,
   savedWorkItems,
@@ -7,6 +9,28 @@ function WorkExperienceForm({
   onEdit,
 }) {
   const [workItems, setWorkItems] = useState(savedWorkItems);
+
+  function addItem() {
+    const currentItems = parseFormData("work", "work-form");
+
+    setWorkItems([
+      {
+        id: crypto.randomUUID(),
+        company: "",
+        position: "",
+        responsibilities: "",
+        workStart: "",
+        workEnd: "",
+      },
+      ...currentItems,
+    ]);
+  }
+
+  function deleteItem(id) {
+    const currentItems = parseFormData("work", "work-form");
+
+    setWorkItems(currentItems.filter((item) => item.id !== id));
+  }
 
   return (
     <div id="work">
@@ -23,12 +47,16 @@ function WorkExperienceForm({
         }) => (
           <div key={id}>
             <form className="work-form">
+              <input type="hidden" name="id" value={id} readOnly />
+
               <label htmlFor={`company-${id}`}>Company</label>
               <input
                 type="text"
                 name="company"
                 id={`company-${id}`}
+                required
                 value={company}
+                readOnly={isSubmitted}
               />
 
               <label htmlFor={`position-${id}`}>Position</label>
@@ -36,7 +64,9 @@ function WorkExperienceForm({
                 type="text"
                 name="position"
                 id={`position-${id}`}
+                required
                 value={position}
+                readOnly={isSubmitted}
               />
 
               <label htmlFor={`responsibilities-${id}`}>Responsibilities</label>
@@ -45,31 +75,30 @@ function WorkExperienceForm({
                 name="responsibilities"
                 id={`responsibilities-${id}`}
                 value={responsibilities}
+                readOnly={isSubmitted}
               />
 
-              <label htmlFor={`workStart-${id}`}>Start Date</label>
+              <label htmlFor={`workStartDate-${id}`}>Start Date</label>
               <input
                 type="date"
-                name="workStart"
-                id={`workStart-${id}`}
+                name="workStartDate"
+                id={`workStartDate-${id}`}
+                required
                 value={workStartDate}
+                readOnly={isSubmitted}
               />
 
-              <label htmlFor={`workEnd-${id}`}>End Date</label>
+              <label htmlFor={`workEndDate-${id}`}>End Date</label>
               <input
                 type="date"
-                name="workEnd"
-                id={`workEnd-${id}`}
+                name="workEndDate"
+                id={`workEndDate-${id}`}
                 value={workEndDate}
+                readOnly={isSubmitted}
               />
 
               {!isSubmitted && (
-                <button
-                  type="button"
-                  onClick={() =>
-                    setWorkItems(workItems.filter((item) => item.id !== id))
-                  }
-                >
+                <button type="button" onClick={() => deleteItem(id)}>
                   Delete
                 </button>
               )}
@@ -85,16 +114,21 @@ function WorkExperienceForm({
           </button>
         ) : (
           <>
-            <button
-              type="button"
-              onClick={() =>
-                setWorkItems([{ id: crypto.randomUUID() }, ...workItems])
-              }
-            >
+            <button type="button" onClick={addItem}>
               Add
             </button>
 
-            <button type="submit" onClick={() => saveWorkItems(workItems)}>
+            <button
+              type="submit"
+              onClick={() =>
+                saveWorkItems(
+                  parseFormData("work", "work-form").filter(
+                    ({ company, position, workStart }) =>
+                      company || position || workStart,
+                  ),
+                )
+              }
+            >
               Submit
             </button>
           </>
