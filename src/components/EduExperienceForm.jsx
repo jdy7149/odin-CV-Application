@@ -1,6 +1,11 @@
 import { useState } from "react";
 
-function EduExperienceForm({ isSubmitted, savedEduItems, onSubmit, onEdit }) {
+function EduExperienceForm({
+  isSubmitted,
+  savedEduItems,
+  saveEduItems,
+  onEdit,
+}) {
   const [eduItems, setEduItems] = useState(savedEduItems);
 
   function onDelete(id) {
@@ -88,7 +93,7 @@ function EduExperienceForm({ isSubmitted, savedEduItems, onSubmit, onEdit }) {
               Add
             </button>
 
-            <button type="button" onClick={onSubmit}>
+            <button type="button" onClick={saveEduItems(eduItems)}>
               Submit
             </button>
           </>

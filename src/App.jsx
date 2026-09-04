@@ -5,8 +5,6 @@ import GeneralInfo from "./components/GeneralInfo";
 import EduExperience from "./components/EduExperience";
 import WorkExperience from "./components/WorkExperience";
 
-import parseFormData from "./utils/parseFormData";
-
 import { useState } from "react";
 
 function App() {
@@ -27,13 +25,13 @@ function App() {
     setIsGeneralSubmitted(true);
   }
 
-  function onEduSubmit() {
-    setEduItems(parseFormData("edu", "edu-form"));
+  function onEduSubmit(localItems) {
+    setEduItems(localItems);
     setIsEduSubmitted(true);
   }
 
-  function onWorkSubmit() {
-    setWorkItems(parseFormData("work", "work-form"));
+  function onWorkSubmit(localItems) {
+    setWorkItems(localItems);
     setIsWorkSubmitted(true);
   }
 

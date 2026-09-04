@@ -1,6 +1,11 @@
 import { useState } from "react";
 
-function WorkExperienceForm({ isSubmitted, savedWorkItems, onSubmit, onEdit }) {
+function WorkExperienceForm({
+  isSubmitted,
+  savedWorkItems,
+  saveWorkItems,
+  onEdit,
+}) {
   const [workItems, setWorkItems] = useState(savedWorkItems);
 
   return (
@@ -89,7 +94,7 @@ function WorkExperienceForm({ isSubmitted, savedWorkItems, onSubmit, onEdit }) {
               Add
             </button>
 
-            <button type="submit" onClick={onSubmit}>
+            <button type="submit" onClick={() => saveWorkItems(workItems)}>
               Submit
             </button>
           </>
