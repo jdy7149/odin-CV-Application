@@ -51,7 +51,7 @@ function EduExperienceForm({
                 className="form-id"
                 type="hidden"
                 name="id"
-                value={id}
+                defaultValue={id}
                 readOnly
               />
 
@@ -61,7 +61,7 @@ function EduExperienceForm({
                   type="text"
                   name="school"
                   id={`school-${id}`}
-                  value={school}
+                  defaultValue={school}
                   required
                   readOnly={isSubmitted}
                 />
@@ -73,7 +73,7 @@ function EduExperienceForm({
                   type="text"
                   name="course"
                   id={`course-${id}`}
-                  value={course}
+                  defaultValue={course}
                   required
                   readOnly={isSubmitted}
                 />
@@ -85,7 +85,7 @@ function EduExperienceForm({
                   type="date"
                   name="eduStartDate"
                   id={`eduStartDate-${id}`}
-                  value={eduStartDate}
+                  defaultValue={eduStartDate}
                   required
                   readOnly={isSubmitted}
                 />
@@ -97,7 +97,7 @@ function EduExperienceForm({
                   type="date"
                   name="eduEndDate"
                   id={`eduEndDate-${id}`}
-                  value={eduEndDate}
+                  defaultValue={eduEndDate}
                   readOnly={isSubmitted}
                 />
               </div>

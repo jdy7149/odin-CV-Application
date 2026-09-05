@@ -61,7 +61,7 @@ function WorkExperienceForm({
                   className="form-id"
                   type="hidden"
                   name="id"
-                  value={id}
+                  defaultValue={id}
                   readOnly
                 />
 
@@ -72,7 +72,7 @@ function WorkExperienceForm({
                     name="company"
                     id={`company-${id}`}
                     required
-                    value={company}
+                    defaultValue={company}
                     readOnly={isSubmitted}
                   />
                 </div>
@@ -84,7 +84,7 @@ function WorkExperienceForm({
                     name="position"
                     id={`position-${id}`}
                     required
-                    value={position}
+                    defaultValue={position}
                     readOnly={isSubmitted}
                   />
                 </div>
@@ -97,7 +97,7 @@ function WorkExperienceForm({
                     type="text"
                     name="responsibilities"
                     id={`responsibilities-${id}`}
-                    value={responsibilities}
+                    defaultValue={responsibilities}
                     readOnly={isSubmitted}
                   />
                 </div>
@@ -109,7 +109,7 @@ function WorkExperienceForm({
                     name="workStartDate"
                     id={`workStartDate-${id}`}
                     required
-                    value={workStartDate}
+                    defaultValue={workStartDate}
                     readOnly={isSubmitted}
                   />
                 </div>
@@ -120,7 +120,7 @@ function WorkExperienceForm({
                     type="date"
                     name="workEndDate"
                     id={`workEndDate-${id}`}
-                    value={workEndDate}
+                    defaultValue={workEndDate}
                     readOnly={isSubmitted}
                   />
                 </div>

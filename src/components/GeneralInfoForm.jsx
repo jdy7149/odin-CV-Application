@@ -18,7 +18,7 @@ function GeneralInfoForm({
               type="text"
               name="name"
               id="name"
-              value={name}
+              defaultValue={name}
               required
               readOnly={isSubmitted}
             />
@@ -30,7 +30,7 @@ function GeneralInfoForm({
               type="email"
               name="email"
               id="email"
-              value={email}
+              defaultValue={email}
               required
               readOnly={isSubmitted}
             />
@@ -42,7 +42,7 @@ function GeneralInfoForm({
               type="tel"
               name="phoneNumber"
               id="phone"
-              value={phoneNumber}
+              defaultValue={phoneNumber}
               readOnly={isSubmitted}
             />
           </div>
