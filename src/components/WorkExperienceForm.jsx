@@ -11,7 +11,7 @@ function WorkExperienceForm({
   const [workItems, setWorkItems] = useState(savedWorkItems);
 
   function addItem() {
-    const currentItems = parseFormData("work", "work-form");
+    const currentItems = parseFormData("work", "experience-form");
 
     setWorkItems([
       {
@@ -19,115 +19,148 @@ function WorkExperienceForm({
         company: "",
         position: "",
         responsibilities: "",
-        workStart: "",
-        workEnd: "",
+        workStartDate: "",
+        workEndDate: "",
       },
       ...currentItems,
     ]);
   }
 
   function deleteItem(id) {
-    const currentItems = parseFormData("work", "work-form");
+    const currentItems = parseFormData("work", "experience-form");
 
     setWorkItems(currentItems.filter((item) => item.id !== id));
   }
 
+  function submitItems() {
+    saveWorkItems(
+      parseFormData("work", "experience-form").filter(
+        ({ company, position, workStartDate }) =>
+          company || position || workStartDate,
+      ),
+    );
+  }
+
   return (
-    <div id="work">
-      <h1>Work Experience</h1>
+    <div id="work" className="form-section experience-section">
+      <h1 className="form-title">Work Experience</h1>
 
-      {workItems.map(
-        ({
-          id,
-          company,
-          position,
-          responsibilities,
-          workStartDate,
-          workEndDate,
-        }) => (
-          <div key={id}>
-            <form className="work-form">
-              <input type="hidden" name="id" value={id} readOnly />
+      <div className="experience-list">
+        {workItems.map(
+          ({
+            id,
+            company,
+            position,
+            responsibilities,
+            workStartDate,
+            workEndDate,
+          }) => (
+            <div className="experience-item" key={id}>
+              <form className="form experience-form">
+                <input
+                  className="form-id"
+                  type="hidden"
+                  name="id"
+                  value={id}
+                  readOnly
+                />
 
-              <label htmlFor={`company-${id}`}>Company</label>
-              <input
-                type="text"
-                name="company"
-                id={`company-${id}`}
-                required
-                value={company}
-                readOnly={isSubmitted}
-              />
+                <div className="form-field">
+                  <label htmlFor={`company-${id}`}>Company</label>
+                  <input
+                    type="text"
+                    name="company"
+                    id={`company-${id}`}
+                    required
+                    value={company}
+                    readOnly={isSubmitted}
+                  />
+                </div>
 
-              <label htmlFor={`position-${id}`}>Position</label>
-              <input
-                type="text"
-                name="position"
-                id={`position-${id}`}
-                required
-                value={position}
-                readOnly={isSubmitted}
-              />
+                <div className="form-field">
+                  <label htmlFor={`position-${id}`}>Position</label>
+                  <input
+                    type="text"
+                    name="position"
+                    id={`position-${id}`}
+                    required
+                    value={position}
+                    readOnly={isSubmitted}
+                  />
+                </div>
 
-              <label htmlFor={`responsibilities-${id}`}>Responsibilities</label>
-              <input
-                type="text"
-                name="responsibilities"
-                id={`responsibilities-${id}`}
-                value={responsibilities}
-                readOnly={isSubmitted}
-              />
+                <div className="form-field">
+                  <label htmlFor={`responsibilities-${id}`}>
+                    Responsibilities
+                  </label>
+                  <input
+                    type="text"
+                    name="responsibilities"
+                    id={`responsibilities-${id}`}
+                    value={responsibilities}
+                    readOnly={isSubmitted}
+                  />
+                </div>
 
-              <label htmlFor={`workStartDate-${id}`}>Start Date</label>
-              <input
-                type="date"
-                name="workStartDate"
-                id={`workStartDate-${id}`}
-                required
-                value={workStartDate}
-                readOnly={isSubmitted}
-              />
+                <div className="form-field">
+                  <label htmlFor={`workStartDate-${id}`}>Start Date</label>
+                  <input
+                    type="date"
+                    name="workStartDate"
+                    id={`workStartDate-${id}`}
+                    required
+                    value={workStartDate}
+                    readOnly={isSubmitted}
+                  />
+                </div>
 
-              <label htmlFor={`workEndDate-${id}`}>End Date</label>
-              <input
-                type="date"
-                name="workEndDate"
-                id={`workEndDate-${id}`}
-                value={workEndDate}
-                readOnly={isSubmitted}
-              />
+                <div className="form-field">
+                  <label htmlFor={`workEndDate-${id}`}>End Date</label>
+                  <input
+                    type="date"
+                    name="workEndDate"
+                    id={`workEndDate-${id}`}
+                    value={workEndDate}
+                    readOnly={isSubmitted}
+                  />
+                </div>
 
-              {!isSubmitted && (
-                <button type="button" onClick={() => deleteItem(id)}>
-                  Delete
-                </button>
-              )}
-            </form>
-          </div>
-        ),
-      )}
+                {!isSubmitted && (
+                  <div className="item-actions">
+                    <button
+                      className="button button-delete"
+                      type="button"
+                      onClick={() => deleteItem(id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                )}
+              </form>
+            </div>
+          ),
+        )}
+      </div>
 
-      <div>
+      <div className="form-actions">
         {isSubmitted ? (
-          <button type="button" onClick={onEdit}>
+          <button className="button button-edit" type="button" onClick={onEdit}>
             Edit
           </button>
         ) : (
           <>
-            <button type="button" onClick={addItem}>
+            <button
+              className="button button-add"
+              type="button"
+              onClick={addItem}
+            >
               Add
             </button>
 
             <button
-              type="submit"
-              onClick={() =>
-                saveWorkItems(
-                  parseFormData("work", "work-form").filter(
-                    ({ company, position, workStart }) =>
-                      company || position || workStart,
-                  ),
-                )
-              }
+              className="button button-submit"
+              type="button"
+              onClick={submitItems}
             >
               Submit
             </button>

@@ -11,7 +11,7 @@ function EduExperienceForm({
   const [eduItems, setEduItems] = useState(savedEduItems);
 
   function addItem() {
-    const currentItems = parseFormData("edu", "edu-form");
+    const currentItems = parseFormData("edu", "experience-form");
 
     setEduItems([
       {
@@ -26,88 +26,118 @@ function EduExperienceForm({
   }
 
   function deleteItem(id) {
-    const currentItems = parseFormData("edu", "edu-form");
+    const currentItems = parseFormData("edu", "experience-form");
 
     setEduItems(currentItems.filter((item) => item.id !== id));
   }
 
   function submitItems() {
     saveEduItems(
-      parseFormData("edu", "edu-form").filter(
+      parseFormData("edu", "experience-form").filter(
         ({ school, course, eduStartDate }) => school || course || eduStartDate,
       ),
     );
   }
 
   return (
-    <div id="edu">
-      <h1>Education Experience</h1>
+    <div id="edu" className="form-section experience-section">
+      <h1 className="form-title">Education Experience</h1>
 
-      {eduItems.map(({ id, school, course, eduStartDate, eduEndDate }) => (
-        <div key={id}>
-          <form className="edu-form">
-            <input type="hidden" name="id" value={id} readOnly />
+      <div className="experience-list">
+        {eduItems.map(({ id, school, course, eduStartDate, eduEndDate }) => (
+          <div className="experience-item" key={id}>
+            <form className="form experience-form">
+              <input
+                className="form-id"
+                type="hidden"
+                name="id"
+                value={id}
+                readOnly
+              />
 
-            <label htmlFor={`school-${id}`}>School</label>
-            <input
-              type="text"
-              name="school"
-              id={`school-${id}`}
-              value={school}
-              required
-              readOnly={isSubmitted}
-            />
+              <div className="form-field">
+                <label htmlFor={`school-${id}`}>School</label>
+                <input
+                  type="text"
+                  name="school"
+                  id={`school-${id}`}
+                  value={school}
+                  required
+                  readOnly={isSubmitted}
+                />
+              </div>
 
-            <label htmlFor={`course-${id}`}>Course</label>
-            <input
-              type="text"
-              name="course"
-              id={`course-${id}`}
-              value={course}
-              required
-              readOnly={isSubmitted}
-            />
+              <div className="form-field">
+                <label htmlFor={`course-${id}`}>Course</label>
+                <input
+                  type="text"
+                  name="course"
+                  id={`course-${id}`}
+                  value={course}
+                  required
+                  readOnly={isSubmitted}
+                />
+              </div>
 
-            <label htmlFor={`eduStartDate-${id}`}>Start Date</label>
-            <input
-              type="date"
-              name="eduStartDate"
-              id={`eduStartDate-${id}`}
-              value={eduStartDate}
-              required
-              readOnly={isSubmitted}
-            />
+              <div className="form-field">
+                <label htmlFor={`eduStartDate-${id}`}>Start Date</label>
+                <input
+                  type="date"
+                  name="eduStartDate"
+                  id={`eduStartDate-${id}`}
+                  value={eduStartDate}
+                  required
+                  readOnly={isSubmitted}
+                />
+              </div>
 
-            <label htmlFor={`eduEndDate-${id}`}>End Date</label>
-            <input
-              type="date"
-              name="eduEndDate"
-              id={`eduEndDate-${id}`}
-              value={eduEndDate}
-              readOnly={isSubmitted}
-            />
+              <div className="form-field">
+                <label htmlFor={`eduEndDate-${id}`}>End Date</label>
+                <input
+                  type="date"
+                  name="eduEndDate"
+                  id={`eduEndDate-${id}`}
+                  value={eduEndDate}
+                  readOnly={isSubmitted}
+                />
+              </div>
 
-            {!isSubmitted && (
-              <button type="button" onClick={() => deleteItem(id)}>
-                Delete
-              </button>
-            )}
-          </form>
-        </div>
-      ))}
+              {!isSubmitted && (
+                <div className="item-actions">
+                  <button
+                    className="button button-delete"
+                    type="button"
+                    onClick={() => deleteItem(id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              )}
+            </form>
+          </div>
+        ))}
+      </div>
 
-      <div>
+      <div className="form-actions">
         {isSubmitted ? (
-          <button type="button" onClick={onEdit}>
+          <button className="button button-edit" type="button" onClick={onEdit}>
             Edit
           </button>
         ) : (
           <>
-            <button type="button" onClick={addItem}>
+            <button
+              className="button button-add"
+              type="button"
+              onClick={addItem}
+            >
               Add
             </button>
 
-            <button type="button" onClick={submitItems}>
+            <button
+              className="button button-submit"
+              type="button"
+              onClick={submitItems}
+            >
               Submit
             </button>
           </>

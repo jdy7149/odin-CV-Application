@@ -7,49 +7,66 @@ function GeneralInfoForm({
   const { name, email, phoneNumber } = savedGeneralInfo;
 
   return (
-    <div id="general">
-      <form action="" className="general-form">
-        <h1>General Information</h1>
-        <div>
-          <label htmlFor="name" />
-          <input
-            type="text"
-            name="name"
-            id="name"
-            value={name}
-            required
-            readOnly={isSubmitted}
-          />
-          <label htmlFor="email" />
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            required
-            readOnly={isSubmitted}
-          />
-          <label htmlFor="phone" />
-          <input
-            type="tel"
-            name="phone"
-            id="phone"
-            value={phoneNumber}
-            readOnly={isSubmitted}
-          />
+    <div id="general" className="form-section general-section">
+      <form className="form">
+        <h1 className="form-title">General Information</h1>
+
+        <div className="form-fields">
+          <div className="form-field">
+            <label htmlFor="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              value={name}
+              required
+              readOnly={isSubmitted}
+            />
+          </div>
+
+          <div className="form-field">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              value={email}
+              required
+              readOnly={isSubmitted}
+            />
+          </div>
+
+          <div className="form-field">
+            <label htmlFor="phone">Phone</label>
+            <input
+              type="tel"
+              name="phoneNumber"
+              id="phone"
+              value={phoneNumber}
+              readOnly={isSubmitted}
+            />
+          </div>
         </div>
-        <div>
+
+        <div className="form-actions">
           {isSubmitted ? (
-            <button type="button" onClick={onEdit}>
+            <button
+              className="button button-edit"
+              type="button"
+              onClick={onEdit}
+            >
               Edit
             </button>
           ) : (
             <button
+              className="button button-submit"
               type="button"
               onClick={() =>
                 saveGeneralInfo(
                   Object.fromEntries(
-                    new FormData("general", "general-form").entries(),
+                    new FormData(
+                      document.querySelector("#general form"),
+                    ).entries(),
                   ),
                 )
               }
