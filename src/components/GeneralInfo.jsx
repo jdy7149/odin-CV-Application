@@ -2,12 +2,12 @@ function GeneralInfo({ info }) {
   const { name, email, phoneNumber } = info;
 
   return (
-    <div>
-      <h1>General Information</h1>
+    <div className="saved-experience" id="saved-general">
+      <h1 className="saved-experience-title">General Information</h1>
 
-      <form className="saved-general-form">
-        <div>
-          <label htmlFor="saved-name">Name: </label>
+      <form className="saved-experience-form">
+        <div className="saved-field">
+          <label htmlFor="saved-name">Name:</label>
           <input
             type="text"
             name="name"
@@ -17,8 +17,8 @@ function GeneralInfo({ info }) {
           />
         </div>
 
-        <div>
-          <label htmlFor="saved-email">Email: </label>
+        <div className="saved-field">
+          <label htmlFor="saved-email">Email:</label>
           <input
             type="email"
             name="email"
@@ -28,8 +28,8 @@ function GeneralInfo({ info }) {
           />
         </div>
 
-        <div>
-          <label htmlFor="saved-phoneNumber">Phone: </label>
+        <div className="saved-field">
+          <label htmlFor="saved-phoneNumber">Phone:</label>
           <input
             type="tel"
             name="phoneNumber"
