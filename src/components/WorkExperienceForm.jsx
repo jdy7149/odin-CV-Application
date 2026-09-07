@@ -14,6 +14,7 @@ function WorkExperienceForm({
     const currentItems = parseFormData("work", "experience-form");
 
     setWorkItems([
+      ...currentItems,
       {
         id: crypto.randomUUID(),
         company: "",
@@ -22,7 +23,6 @@ function WorkExperienceForm({
         workStartDate: "",
         workEndDate: "",
       },
-      ...currentItems,
     ]);
   }
 

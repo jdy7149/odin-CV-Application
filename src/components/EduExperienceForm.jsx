@@ -14,6 +14,7 @@ function EduExperienceForm({
     const currentItems = parseFormData("edu", "experience-form");
 
     setEduItems([
+      ...currentItems,
       {
         id: crypto.randomUUID(),
         school: "",
@@ -21,7 +22,6 @@ function EduExperienceForm({
         eduStartDate: "",
         eduEndDate: "",
       },
-      ...currentItems,
     ]);
   }
 
