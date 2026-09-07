@@ -12,7 +12,12 @@ function App() {
   const [isEduSubmitted, setIsEduSubmitted] = useState(false);
   const [isWorkSubmitted, setIsWorkSubmitted] = useState(false);
 
-  const [generalInfo, setGeneralInfo] = useState({});
+  const [generalInfo, setGeneralInfo] = useState({
+    id: "",
+    name: "",
+    email: "",
+    phoneNumber: "",
+  });
   const [eduItems, setEduItems] = useState([]);
   const [workItems, setWorkItems] = useState([]);
 
@@ -75,6 +80,7 @@ function App() {
             </div>
           </section>
           <section>
+            <h1>CV Preview</h1>
             <div className="display-wrapper">
               <GeneralInfo info={generalInfo} />
               <EduExperience items={eduItems} />
