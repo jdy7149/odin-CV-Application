@@ -1,7 +1,13 @@
-// Parse data of input tags' value in 'className' forms within 'idName' div
 function parseFormData(idName, className) {
   return Array.from(document.querySelectorAll(`#${idName} .${className}`)).map(
-    (formElem) => Object.fromEntries(new FormData(formElem).entries()),
+    (item) => ({
+      ...Object.fromEntries(
+        Array.from(item.querySelectorAll("input")).map((input) => [
+          input.name,
+          input.value,
+        ]),
+      ),
+    }),
   );
 }
 
