@@ -11,7 +11,7 @@ function WorkExperienceForm({
   const [workItems, setWorkItems] = useState(savedWorkItems);
 
   function addItem() {
-    const currentItems = parseFormData("work", "experience-form");
+    const currentItems = parseFormData("work", "experience-item");
 
     setWorkItems([
       ...currentItems,
@@ -27,41 +27,44 @@ function WorkExperienceForm({
   }
 
   function deleteItem(id) {
-    const currentItems = parseFormData("work", "experience-form");
+    const currentItems = parseFormData("work", "experience-item");
 
     setWorkItems(currentItems.filter((item) => item.id !== id));
   }
 
-  function submitItems() {
-    saveWorkItems(
-      parseFormData("work", "experience-form").filter(
-        ({ company, position, workStartDate }) =>
-          company || position || workStartDate,
-      ),
+  function submitItems(event) {
+    event.preventDefault();
+
+    const items = parseFormData("work", "experience-item").filter(
+      ({ company, position, workStartDate }) =>
+        company || position || workStartDate,
     );
+
+    saveWorkItems(items);
+    setWorkItems(items);
   }
 
   return (
     <div id="work" className="form-section experience-section">
-      <h1 className="form-title">Work Experience</h1>
+      <form className="form work-experience-form" onSubmit={submitItems}>
+        <h1 className="form-title">Work Experience</h1>
 
-      <div className="experience-list">
-        {workItems.map(
-          ({
-            id,
-            company,
-            position,
-            responsibilities,
-            workStartDate,
-            workEndDate,
-          }) => (
-            <div className="experience-item" key={id}>
-              <form className="form experience-form">
+        <div className="experience-list">
+          {workItems.map(
+            ({
+              id,
+              company,
+              position,
+              responsibilities,
+              workStartDate,
+              workEndDate,
+            }) => (
+              <div className="experience-item" key={id}>
                 <input
                   className="form-id"
                   type="hidden"
                   name="id"
-                  defaultValue={id}
+                  value={id}
                   readOnly
                 />
 
@@ -71,8 +74,8 @@ function WorkExperienceForm({
                     type="text"
                     name="company"
                     id={`company-${id}`}
-                    required
                     defaultValue={company}
+                    required
                     readOnly={isSubmitted}
                   />
                 </div>
@@ -83,8 +86,8 @@ function WorkExperienceForm({
                     type="text"
                     name="position"
                     id={`position-${id}`}
-                    required
                     defaultValue={position}
+                    required
                     readOnly={isSubmitted}
                   />
                 </div>
@@ -108,8 +111,8 @@ function WorkExperienceForm({
                     type="date"
                     name="workStartDate"
                     id={`workStartDate-${id}`}
-                    required
                     defaultValue={workStartDate}
+                    required
                     readOnly={isSubmitted}
                   />
                 </div>
@@ -136,37 +139,37 @@ function WorkExperienceForm({
                     </button>
                   </div>
                 )}
-              </form>
-            </div>
-          ),
-        )}
-      </div>
+              </div>
+            ),
+          )}
+        </div>
 
-      <div className="form-actions">
-        {isSubmitted ? (
-          <button className="button button-edit" type="button" onClick={onEdit}>
-            Edit
-          </button>
-        ) : (
-          <>
+        <div className="form-actions">
+          {isSubmitted ? (
             <button
-              className="button button-add"
+              className="button button-edit"
               type="button"
-              onClick={addItem}
+              onClick={onEdit}
             >
-              Add
+              Edit
             </button>
+          ) : (
+            <>
+              <button
+                className="button button-add"
+                type="button"
+                onClick={addItem}
+              >
+                Add
+              </button>
 
-            <button
-              className="button button-submit"
-              type="button"
-              onClick={submitItems}
-            >
-              Submit
-            </button>
-          </>
-        )}
-      </div>
+              <button className="button button-submit" type="submit">
+                Submit
+              </button>
+            </>
+          )}
+        </div>
+      </form>
     </div>
   );
 }

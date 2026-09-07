@@ -6,9 +6,17 @@ function GeneralInfoForm({
 }) {
   const { name, email, phoneNumber } = savedGeneralInfo;
 
+  function onSubmit(event) {
+    event.preventDefault();
+
+    saveGeneralInfo(
+      Object.fromEntries(new FormData(event.currentTarget).entries()),
+    );
+  }
+
   return (
     <div id="general" className="form-section general-section">
-      <form className="form">
+      <form className="form general-form" onSubmit={onSubmit}>
         <h1 className="form-title">General Information</h1>
 
         <div className="form-fields">
@@ -58,19 +66,7 @@ function GeneralInfoForm({
               Edit
             </button>
           ) : (
-            <button
-              className="button button-submit"
-              type="button"
-              onClick={() =>
-                saveGeneralInfo(
-                  Object.fromEntries(
-                    new FormData(
-                      document.querySelector("#general form"),
-                    ).entries(),
-                  ),
-                )
-              }
-            >
+            <button className="button button-submit" type="submit">
               Submit
             </button>
           )}

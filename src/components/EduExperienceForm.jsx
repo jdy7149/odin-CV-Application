@@ -11,7 +11,7 @@ function EduExperienceForm({
   const [eduItems, setEduItems] = useState(savedEduItems);
 
   function addItem() {
-    const currentItems = parseFormData("edu", "experience-form");
+    const currentItems = parseFormData("edu", "experience-item");
 
     setEduItems([
       ...currentItems,
@@ -26,32 +26,35 @@ function EduExperienceForm({
   }
 
   function deleteItem(id) {
-    const currentItems = parseFormData("edu", "experience-form");
+    const currentItems = parseFormData("edu", "experience-item");
 
     setEduItems(currentItems.filter((item) => item.id !== id));
   }
 
-  function submitItems() {
-    saveEduItems(
-      parseFormData("edu", "experience-form").filter(
-        ({ school, course, eduStartDate }) => school || course || eduStartDate,
-      ),
+  function submitItems(event) {
+    event.preventDefault();
+
+    const items = parseFormData("edu", "experience-item").filter(
+      ({ school, course, eduStartDate }) => school && course && eduStartDate,
     );
+
+    saveEduItems(items);
+    setEduItems(items);
   }
 
   return (
     <div id="edu" className="form-section experience-section">
-      <h1 className="form-title">Education Experience</h1>
+      <form className="form education-form" onSubmit={submitItems}>
+        <h1 className="form-title">Education Experience</h1>
 
-      <div className="experience-list">
-        {eduItems.map(({ id, school, course, eduStartDate, eduEndDate }) => (
-          <div className="experience-item" key={id}>
-            <form className="form experience-form">
+        <div className="experience-list">
+          {eduItems.map(({ id, school, course, eduStartDate, eduEndDate }) => (
+            <div className="experience-item" key={id}>
               <input
                 className="form-id"
                 type="hidden"
                 name="id"
-                defaultValue={id}
+                value={id}
                 readOnly
               />
 
@@ -113,36 +116,36 @@ function EduExperienceForm({
                   </button>
                 </div>
               )}
-            </form>
-          </div>
-        ))}
-      </div>
+            </div>
+          ))}
+        </div>
 
-      <div className="form-actions">
-        {isSubmitted ? (
-          <button className="button button-edit" type="button" onClick={onEdit}>
-            Edit
-          </button>
-        ) : (
-          <>
+        <div className="form-actions">
+          {isSubmitted ? (
             <button
-              className="button button-add"
+              className="button button-edit"
               type="button"
-              onClick={addItem}
+              onClick={onEdit}
             >
-              Add
+              Edit
             </button>
+          ) : (
+            <>
+              <button
+                className="button button-add"
+                type="button"
+                onClick={addItem}
+              >
+                Add
+              </button>
 
-            <button
-              className="button button-submit"
-              type="button"
-              onClick={submitItems}
-            >
-              Submit
-            </button>
-          </>
-        )}
-      </div>
+              <button className="button button-submit" type="submit">
+                Submit
+              </button>
+            </>
+          )}
+        </div>
+      </form>
     </div>
   );
 }
