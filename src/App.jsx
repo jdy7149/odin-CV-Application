@@ -18,8 +18,25 @@ function App() {
     email: "",
     phoneNumber: "",
   });
-  const [eduItems, setEduItems] = useState([]);
-  const [workItems, setWorkItems] = useState([]);
+  const [eduItems, setEduItems] = useState([
+    {
+      id: crypto.randomUUID(),
+      school: "",
+      course: "",
+      eduStartDate: "",
+      eduEndDate: "",
+    },
+  ]);
+  const [workItems, setWorkItems] = useState([
+    {
+      id: crypto.randomUUID(),
+      company: "",
+      position: "",
+      responsibilities: "",
+      workStartDate: "",
+      workEndDate: "",
+    },
+  ]);
 
   function saveGeneralInfo(localInfo) {
     setGeneralInfo(localInfo);
