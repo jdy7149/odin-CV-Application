@@ -4,58 +4,41 @@ function EduExperience({ items }) {
       <h1 className="saved-experience-title">Education Experiences</h1>
 
       <div className="saved-experience-list">
-        {items.map(({ id, school, course, eduStartDate, eduEndDate }) => (
-          <div className="saved-experience-item" key={id}>
-            <form className="saved-experience-form">
-              <div className="saved-field">
-                <label htmlFor={`saved-school-${id}`}>School:</label>
-                <input
-                  type="text"
-                  name="school"
-                  id={`saved-school-${id}`}
-                  value={school}
-                  readOnly
-                />
-              </div>
+        {items.map(
+          ({ id, school, course, eduStartDate, eduEndDate }) => (
+            <div className="saved-experience-item" key={id}>
+              <div className="saved-experience-form">
+                <div className="saved-field">
+                  <span className="saved-field-label">School:</span>
+                  <span className="saved-field-value">{school}</span>
+                </div>
 
-              <div className="saved-field">
-                <label htmlFor={`saved-course-${id}`}>Course:</label>
-                <input
-                  type="text"
-                  name="course"
-                  id={`saved-course-${id}`}
-                  value={course}
-                  readOnly
-                />
-              </div>
+                <div className="saved-field">
+                  <span className="saved-field-label">Course:</span>
+                  <span className="saved-field-value">{course}</span>
+                </div>
 
-              <div className="saved-field">
-                <label htmlFor={`saved-eduStartDate-${id}`}>Start Date:</label>
-                <input
-                  type="date"
-                  name="eduStartDate"
-                  id={`saved-eduStartDate-${id}`}
-                  value={eduStartDate}
-                  readOnly
-                />
-              </div>
+                <div className="saved-field">
+                  <span className="saved-field-label">Start Date:</span>
+                  <span className="saved-field-value">
+                    {eduStartDate}
+                  </span>
+                </div>
 
-              <div className="saved-field">
-                <label htmlFor={`saved-eduEndDate-${id}`}>End Date:</label>
-                <input
-                  type="date"
-                  name="eduEndDate"
-                  id={`saved-eduEndDate-${id}`}
-                  value={eduEndDate}
-                  readOnly
-                />
+                <div className="saved-field">
+                  <span className="saved-field-label">End Date:</span>
+                  <span className="saved-field-value">
+                    {eduEndDate}
+                  </span>
+                </div>
               </div>
-            </form>
-          </div>
-        ))}
+            </div>
+          ),
+        )}
       </div>
     </div>
   );
 }
 
 export default EduExperience;
+

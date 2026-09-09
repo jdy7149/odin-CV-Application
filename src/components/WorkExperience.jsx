@@ -14,66 +14,40 @@ function WorkExperience({ items }) {
             workEndDate,
           }) => (
             <div className="saved-experience-item" key={id}>
-              <form className="saved-experience-form">
+              <div className="saved-experience-form">
                 <div className="saved-field">
-                  <label htmlFor={`saved-company-${id}`}>Company:</label>
-                  <input
-                    type="text"
-                    name="company"
-                    id={`saved-company-${id}`}
-                    value={company}
-                    readOnly
-                  />
+                  <span className="saved-field-label">Company:</span>
+                  <span className="saved-field-value">{company}</span>
                 </div>
 
                 <div className="saved-field">
-                  <label htmlFor={`saved-position-${id}`}>Position:</label>
-                  <input
-                    type="text"
-                    name="position"
-                    id={`saved-position-${id}`}
-                    value={position}
-                    readOnly
-                  />
+                  <span className="saved-field-label">Position:</span>
+                  <span className="saved-field-value">{position}</span>
                 </div>
 
                 <div className="saved-field">
-                  <label htmlFor={`saved-responsibilities-${id}`}>
+                  <span className="saved-field-label">
                     Responsibilities:
-                  </label>
-                  <input
-                    type="text"
-                    name="responsibilities"
-                    id={`saved-responsibilities-${id}`}
-                    value={responsibilities}
-                    readOnly
-                  />
+                  </span>
+                  <span className="saved-field-value">
+                    {responsibilities}
+                  </span>
                 </div>
 
                 <div className="saved-field">
-                  <label htmlFor={`saved-workStartDate-${id}`}>
-                    Start Date:
-                  </label>
-                  <input
-                    type="date"
-                    name="workStartDate"
-                    id={`saved-workStartDate-${id}`}
-                    value={workStartDate}
-                    readOnly
-                  />
+                  <span className="saved-field-label">Start Date:</span>
+                  <span className="saved-field-value">
+                    {workStartDate}
+                  </span>
                 </div>
 
                 <div className="saved-field">
-                  <label htmlFor={`saved-workEndDate-${id}`}>End Date:</label>
-                  <input
-                    type="date"
-                    name="workEndDate"
-                    id={`saved-workEndDate-${id}`}
-                    value={workEndDate}
-                    readOnly
-                  />
+                  <span className="saved-field-label">End Date:</span>
+                  <span className="saved-field-value">
+                    {workEndDate}
+                  </span>
                 </div>
-              </form>
+              </div>
             </div>
           ),
         )}
@@ -83,3 +57,4 @@ function WorkExperience({ items }) {
 }
 
 export default WorkExperience;
+

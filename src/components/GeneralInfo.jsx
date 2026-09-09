@@ -5,42 +5,25 @@ function GeneralInfo({ info }) {
     <div className="saved-experience" id="saved-general">
       <h1 className="saved-experience-title">General Information</h1>
 
-      <form className="saved-experience-form">
+      <div className="saved-experience-form">
         <div className="saved-field">
-          <label htmlFor="saved-name">Name:</label>
-          <input
-            type="text"
-            name="name"
-            id="saved-name"
-            value={name}
-            readOnly
-          />
+          <span className="saved-field-label">Name:</span>
+          <span className="saved-field-value">{name}</span>
         </div>
 
         <div className="saved-field">
-          <label htmlFor="saved-email">Email:</label>
-          <input
-            type="email"
-            name="email"
-            id="saved-email"
-            value={email}
-            readOnly
-          />
+          <span className="saved-field-label">Email:</span>
+          <span className="saved-field-value">{email}</span>
         </div>
 
         <div className="saved-field">
-          <label htmlFor="saved-phoneNumber">Phone:</label>
-          <input
-            type="tel"
-            name="phoneNumber"
-            id="saved-phoneNumber"
-            value={phoneNumber}
-            readOnly
-          />
+          <span className="saved-field-label">Phone:</span>
+          <span className="saved-field-value">{phoneNumber}</span>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
 
 export default GeneralInfo;
+
