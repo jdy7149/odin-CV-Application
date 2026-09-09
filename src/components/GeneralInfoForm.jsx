@@ -51,6 +51,7 @@ function GeneralInfoForm({
               name="phoneNumber"
               id="phone"
               defaultValue={phoneNumber}
+              required
               readOnly={isSubmitted}
             />
           </div>
