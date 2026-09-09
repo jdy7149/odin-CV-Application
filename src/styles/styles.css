@@ -330,26 +330,18 @@ button {
   display: grid;
   grid-template-columns: 150px minmax(0, 1fr);
   gap: var(--space-lg);
-  align-items: center;
+  align-items: start;
 }
 
-.saved-field label {
+.saved-field-label {
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--color-text-muted);
 }
 
-.saved-field input {
-  width: 100%;
-  min-height: 36px;
-  padding: var(--space-xs) 0;
-  border: 0;
-  background: transparent;
-  color: var(--color-text);
-}
-
-.saved-field input:focus {
-  outline: none;
+.saved-field-value {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 /* =========================
