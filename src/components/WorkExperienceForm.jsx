@@ -40,6 +40,17 @@ function WorkExperienceForm({
         company || position || workStartDate,
     );
 
+    if (items.length === 0) {
+      items.push({
+        id: crypto.randomUUID(),
+        company: "",
+        position: "",
+        responsibilities: "",
+        workStartDate: "",
+        workEndDate: "",
+      });
+    }
+
     saveWorkItems(items);
     setWorkItems(items);
   }

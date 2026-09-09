@@ -38,6 +38,16 @@ function EduExperienceForm({
       ({ school, course, eduStartDate }) => school && course && eduStartDate,
     );
 
+    if (items.length === 0) {
+      items.push({
+        id: crypto.randomUUID(),
+        school: "",
+        course: "",
+        eduStartDate: "",
+        eduEndDate: "",
+      });
+    }
+
     saveEduItems(items);
     setEduItems(items);
   }
