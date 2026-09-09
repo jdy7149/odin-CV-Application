@@ -59,6 +59,7 @@ function GeneralInfoForm({
         <div className="form-actions">
           {isSubmitted ? (
             <button
+              key="edit"
               className="button button-edit"
               type="button"
               onClick={onEdit}
@@ -66,7 +67,7 @@ function GeneralInfoForm({
               Edit
             </button>
           ) : (
-            <button className="button button-submit" type="submit">
+            <button key="submit" className="button button-submit" type="submit">
               Submit
             </button>
           )}
